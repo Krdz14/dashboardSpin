@@ -1,0 +1,16 @@
+{
+ "window": [
+  "2026-05",
+  "2026-07"
+ ],
+ "source": "g5_dataSample_v2_processed.csv",
+ "values": {
+  "ext_ratio": 0.9069310123652787,
+  "ext_ratio_portfolio": 0.8911752193683895,
+  "tpv_mean": 3040.023603079159,
+  "tpv_median": 1242.17,
+  "mm_rate": 0.8202333325347962,
+  "mm_activation": 0.32345765074939004,
+  "mm_pool": 45904
+ }
+}

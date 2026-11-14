@@ -1,0 +1,176 @@
+{
+ "decision": "This dashboard helps Spin's CRM lead decide which users to target next month: the top-scored users for a non-OXXO purchase incentive (Flip-Out) and the cooled-down users most likely to come back to their card (Flip-In).",
+ "generated": "2026-11-12",
+ "data_until": "2026-07",
+ "live_month": "2026-07",
+ "events": {
+  "Flip-Out": {
+   "version": "v2 (E3)",
+   "previous": "v1 (E0)",
+   "model": "Blend (LR + RF + GB)",
+   "experiment": "E3",
+   "change": "Blend (average) of the tuned Logistic Regression, Random Forest and Gradient Boosting from E2",
+   "test30": {
+    "PR_AUC": 0.3412118087764761,
+    "ROC_AUC": 0.6799651996729594,
+    "lift10": 2.2669383104165717,
+    "capture10": 0.22679200940070504
+   },
+   "oot": {
+    "PR_AUC": 0.27566745562384404,
+    "ROC_AUC": 0.6627653593741752,
+    "lift10": 2.088207483836726,
+    "capture10": 0.2087617344658024
+   },
+   "v1_test30": {
+    "PR_AUC": 0.3152850927799151,
+    "capture10": 0.2056404230317274
+   },
+   "v1_oot": {
+    "PR_AUC": 0.24675686157697252,
+    "capture10": 0.18417523468931604
+   },
+   "base_rate_test30": 0.18427890861844953,
+   "base_rate_oot": 0.15804719513918328,
+   "live_train": {
+    "rows": 136279,
+    "events": 24494,
+    "snapshots": "2025-09 to 2026-05"
+   },
+   "drivers": [
+    {
+     "feature": "oxxo_trend",
+     "label": "Change in OXXO share (recent vs. usual)",
+     "importance": 0.09344950805829373,
+     "direction": "higher \u2192 less likely"
+    },
+    {
+     "feature": "oxxo_share",
+     "label": "Share of purchases at OXXO",
+     "importance": 0.06882536957683101,
+     "direction": "higher \u2192 less likely"
+    },
+    {
+     "feature": "oxxo_share_last2",
+     "label": "OXXO share, last 2 months",
+     "importance": 0.05633394955329837,
+     "direction": "higher \u2192 less likely"
+    },
+    {
+     "feature": "ecommerce_share",
+     "label": "Share of online purchases",
+     "importance": 0.03415410366059487,
+     "direction": "higher \u2192 more likely"
+    },
+    {
+     "feature": "nonoxxo_tx_last2",
+     "label": "Purchases outside OXXO, last 2 months",
+     "importance": 0.021884813510049877,
+     "direction": "higher \u2192 less likely"
+    },
+    {
+     "feature": "oxxo_share_last1",
+     "label": "OXXO share, last month",
+     "importance": 0.021013447682726765,
+     "direction": "higher \u2192 less likely"
+    },
+    {
+     "feature": "ecommerce_trend",
+     "label": "Change in online share",
+     "importance": 0.0191574846564531,
+     "direction": "higher \u2192 more likely"
+    },
+    {
+     "feature": "merchant_entropy",
+     "label": "Variety of merchants",
+     "importance": 0.009975191938074779,
+     "direction": "higher \u2192 less likely"
+    }
+   ]
+  },
+  "Flip-In": {
+   "version": "v2 (E1)",
+   "previous": "v1 (E0)",
+   "model": "Gradient Boosting",
+   "experiment": "E1",
+   "change": "Train on 5 stacked monthly snapshots (Sep-2025 to Jan-2026) instead of 1",
+   "test30": {
+    "PR_AUC": 0.18837542770187038,
+    "ROC_AUC": 0.6328503836958522,
+    "lift10": 1.8465054945054944,
+    "capture10": 0.18461538461538463
+   },
+   "oot": {
+    "PR_AUC": 0.1387890532287974,
+    "ROC_AUC": 0.5901820551760084,
+    "lift10": 1.1459076883886863,
+    "capture10": 0.11457848160223567
+   },
+   "v1_test30": {
+    "PR_AUC": 0.17934334477239008,
+    "capture10": 0.16615384615384615
+   },
+   "v1_oot": {
+    "PR_AUC": 0.14058915041471526,
+    "capture10": 0.12808570097810898
+   },
+   "base_rate_test30": 0.12378594553418397,
+   "base_rate_oot": 0.11510829937808278,
+   "live_train": {
+    "rows": 158554,
+    "events": 21697,
+    "snapshots": "2025-09 to 2026-05"
+   },
+   "drivers": [
+    {
+     "feature": "tx_month_avg",
+     "label": "Usual purchases per month",
+     "importance": 0.028891749256548287,
+     "direction": "higher \u2192 less likely"
+    },
+    {
+     "feature": "active_months_share",
+     "label": "Months with purchases (last 6)",
+     "importance": 0.011811156093697622,
+     "direction": "higher \u2192 less likely"
+    },
+    {
+     "feature": "persona_code",
+     "label": "Persona",
+     "importance": 0.011808880420590464,
+     "direction": "depends on persona"
+    },
+    {
+     "feature": "tenure_months",
+     "label": "Months as a customer",
+     "importance": 0.009362699635919477,
+     "direction": "higher \u2192 less likely"
+    },
+    {
+     "feature": "months_since_active",
+     "label": "Months since last purchase",
+     "importance": 0.009013999124757624,
+     "direction": "higher \u2192 more likely"
+    },
+    {
+     "feature": "tx_trend",
+     "label": "Change in purchase frequency (recent vs. usual)",
+     "importance": 0.00842670052231669,
+     "direction": "higher \u2192 more likely"
+    },
+    {
+     "feature": "intl_share",
+     "label": "Share of international purchases",
+     "importance": 0.004153881171818474,
+     "direction": "higher \u2192 less likely"
+    },
+    {
+     "feature": "tx_last2_avg",
+     "label": "Purchases per month, last 2 months",
+     "importance": 0.0037726036500072835,
+     "direction": "higher \u2192 less likely"
+    }
+   ]
+  }
+ }
+}
